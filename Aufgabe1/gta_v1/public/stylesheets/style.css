@@ -46,7 +46,47 @@ a {
 
 /* ### TODO ### Styles for other HTML elements */
 
-/* ... your code here ... */
+.header__image {
+  height: 48px;
+  width: auto;
+}
+
+label {
+  color: var(--gray-color);
+}
+
+input {
+  padding: 0.3rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+input:not([disabled]) {
+  color: inherit;
+}
+
+input[type=submit] {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  width: 100%;
+  font-weight: bold;
+}
+
+fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+}
+
+legend {
+  font-weight: bold;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
 
 
 /* Grid styles (no changes required) */
@@ -109,27 +149,96 @@ a {
 
 /* ### TODO ### Styles for Header Component */
 
-/* ... your code here ... */
+.header {
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
 /* ### TODO ### Styles for Main Component */
 
-/* ... your code here ... */
+.main {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
 
 
 /* ### TODO ### Styles for Tagging component */
 
-/* ... your code here ... */
+.main__tagging {
+  flex: 1;
+}
 
 
 /* ### TODO ### Styles for Discovery component */
 
-/* ... your code here ... */
+.main__discovery {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
+.discovery__wrapper {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.discovery__results, .discovery__taglist {
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.discovery__results {
+  display: flex;
+  flex: 1;
+}
+
+.discovery__results li {
+  flex: 1;
+  list-style-type: none;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--link-color);
+  padding: 1rem;
+}
+
+.discovery__map {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 400px;
+}
+
+@media screen and (max-width:400px) {
+  .discovery__map {
+    min-width: 90vw;
+  }
+}
+
+.discovery__map > img {
+  width: 100%;
+  min-width: 0;
+}
 
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
+.footer {
+  background-color: var(--background-color);
+  border-top: 1px solid var(--border-color);
+  padding: 1rem;
+  margin-top: auto;
+}
 
 
 /* ### TODO ### Media Queries */
