@@ -34,9 +34,9 @@
                     <label for="longitude">Longitude:</label>
                     <input id="longitude" type="number" disabled value="8.390071" step="0.00001" placeholder="8.390071" required>
                     <label for="name">Name:</label>
-                    <input id="name" type="text" maxlength="10" placeholder="e.g. Central Berlin" required>
+                    <input id="name" type="text" maxlength="10" placeholder="e.g. Central Berlin" required pattern="[A-Za-z]">
                     <label for="hashtag">Hashtag:</label>
-                    <input id="hashtag" type="text" placeholder="e.g. #ber" pattern="#[A-Za-z]{10}">
+                    <input id="hashtag" type="text" placeholder="e.g. #ber" pattern="#[A-Za-z]" maxlength="11">
                     <input type="submit" value="Add Tag">
                 </fieldset>
             </form>
