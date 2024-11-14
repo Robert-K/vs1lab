@@ -119,8 +119,10 @@ class MapManager {
 // ... your code here ...
 
 function updateLocation(){
-    LocationHelper.getCurrentPosition;
+    LocationHelper.findLocation;
+    MapManager.initMap(LocationHelper.latitude, LocationHelper.longitude);
     MapManager.updateMarkers(LocationHelper.latitude, LocationHelper.longitude, tags = ["Your Position"]);
+
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
