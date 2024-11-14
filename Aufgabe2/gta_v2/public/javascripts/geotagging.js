@@ -60,7 +60,7 @@ class LocationHelper {
             // Create and initialize LocationHelper object.
             let helper = new LocationHelper(location.coords.latitude, location.coords.longitude);
             // Pass the locationHelper object to the callback.
-            callback(helper);
+            if(callback)(callback(helper));
         }, (error) => {
            alert(error.message)
         });
@@ -119,13 +119,14 @@ class MapManager {
 // ... your code here ...
 
 function updateLocation(){
-    LocationHelper.getCurrentPosition();
-    MapManager.updateMarkers();
-    MapManager.initMap();
+    LocationHelper.findLocation();
+    longitude=LocationHelper.longitude;
+    latitude=LocationHelper.latitude;
+    MapManager.initMap;
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-   updateLocation;
+   updateLocation();
    //alert("This isnt quite working");
 });
