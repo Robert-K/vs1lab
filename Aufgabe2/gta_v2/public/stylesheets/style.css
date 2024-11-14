@@ -239,6 +239,9 @@ h2 {
   padding: 1rem;
   margin-top: auto;
 }
+#map { 
+  height: 500px;
+}
 
 
 /* ### TODO ### Media Queries */
