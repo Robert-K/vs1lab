@@ -118,6 +118,11 @@ class MapManager {
  */
 // ... your code here ...
 
+function updateLocation(){
+    LocationHelper.getCurrentPosition;
+    MapManager.updateMarkers(LocationHelper.latitude, LocationHelper.longitude, tags = ["Your Position"]);
+}
+
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     alert("Please change the script 'geotagging.js'");
