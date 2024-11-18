@@ -119,14 +119,25 @@ class MapManager {
 // ... your code here ...
 
 function updateLocation(){
-    LocationHelper.findLocation();
-    longitude=LocationHelper.longitude;
-    latitude=LocationHelper.latitude;
-    MapManager.initMap;
+    LocationHelper.findLocation((helper) => {
+        document.getElementById("latitude").value = helper.latitude;
+        document.getElementById("longitude").value = helper.longitude;
+
+        document.getElementById("latitudeDiscovery").value = helper.latitude;
+        document.getElementById("longitudeDiscovery").value = helper.longitude;
+
+        let mapContainer = document.getElementById("mapContainer");
+        mapContainer.innerHTML = "";
+        mapContainer.appendChild(document.createElement("div")).setAttribute("id", "map");
+
+        let manager = new MapManager();
+        manager.initMap(helper.latitude, helper.longitude);
+        manager.updateMarkers(helper.latitude, helper.longitude);
+    });
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
    updateLocation();
-   //alert("This isnt quite working");
+   // alert("This isnt quite working");
 });

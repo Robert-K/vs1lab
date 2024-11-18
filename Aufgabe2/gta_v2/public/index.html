@@ -59,8 +59,8 @@
                 <fieldset>
                     <label for="searchterm">Search term or keywords:</label> 
                     <input id="searchterm" placeholder="e.g. Berlin" required>
-                    <input id="latitude" hidden required>
-                    <input id="longitude" hidden required>        
+                    <input id="latitudeDiscovery" hidden required>
+                    <input id="longitudeDiscovery" hidden required>        
                 </fieldset>
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
@@ -73,7 +73,7 @@
                     </ul>
                 </div>
 
-                <div class="discovery__map">
+                <div class="discovery__map" id="mapContainer">
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
                     <span>Result map</span>
                 </div>

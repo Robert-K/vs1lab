@@ -226,7 +226,7 @@ h2 {
   }
 }
 
-.discovery__map > img {
+.discovery__map > * {
   width: 100%;
   min-width: 0;
 }
@@ -239,6 +239,7 @@ h2 {
   padding: 1rem;
   margin-top: auto;
 }
+
 #map { 
   height: 500px;
 }
