@@ -11,8 +11,10 @@
  */
 class GeoTag {
 
-    // TODO: ... your code here ...
-    
+    latitude = '';
+    longitude = '';
+    name = '';
+    hashtag = '';
 }
 
 module.exports = GeoTag;
