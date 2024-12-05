@@ -37,9 +37,9 @@
                 <fieldset>
                     <legend>Add a new GeoTag</legend>
                     <label for="latitude">Latitude:</label>
-                    <input name="latitude" id="latitude" value="<%= latitude %>" type="number" step="0.000001" placeholder="49.01379" required>
+                    <input name="latitude" id="latitude" value="<%= locals?.latitude %>" type="number" step="0.000001" placeholder="49.01379" required>
                     <label for="longitude">Longitude:</label>
-                    <input name="longitude" id="longitude" value="<%= longitude %>" type="number" step="0.000001" placeholder="8.390071" required>
+                    <input name="longitude" id="longitude" value="<%= locals?.longitude %>" type="number" step="0.000001" placeholder="8.390071" required>
                     <label for="name">Name:</label>
                     <input name="name" id="name" type="text" maxlength="10" placeholder="e.g. Central Berlin" required pattern="[A-Za-z]+">
                     <label for="hashtag">Hashtag:</label>
@@ -59,8 +59,8 @@
                 <fieldset>
                     <label for="searchterm">Search term or keywords:</label> 
                     <input name="searchterm" id="searchterm" placeholder="e.g. Berlin" required>
-                    <input name="latitude" value="<%= latitude %>"  id="latitudeDiscovery" hidden required>
-                    <input name="longitude" value="<%= longitude %>" id="longitudeDiscovery" hidden required>        
+                    <input name="latitude" value="<%= locals?.latitude %>"  id="latitudeDiscovery" hidden required>
+                    <input name="longitude" value="<%= locals?.longitude %>" id="longitudeDiscovery" hidden required>        
                 </fieldset>
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
@@ -75,6 +75,7 @@
                 </div>
 
                 <div class="discovery__map" id="mapContainer">
+                    <div id="map" data-tags="<%= JSON.stringify(taglist)  %>" hidden></div>
                     <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
                     <span>Result map</span>
                 </div>
@@ -86,6 +87,8 @@
     <!-- Load JavaScripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./javascripts/location-helper.js"></script>
+    <script src="./javascripts/map-manager.js"></script>
     <script src="./javascripts/geotagging.js"></script>
     
 

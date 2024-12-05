@@ -34,7 +34,7 @@ const GeoTagStore = require('../models/geotag-store');
 const tagStore = new GeoTagStore()
 tagStore.populateWithExamples()
 
-const NEARBY_RADIUS = 0.002
+const NEARBY_RADIUS = 0.004
 
 /**
  * Route '/' for HTTP 'GET' requests.

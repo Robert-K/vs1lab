@@ -16,32 +16,35 @@ console.log("The geoTagging script is going to start...")
  */
 // ... your code here ...
 
-var latitude = null;
-var longitude = null;
-
 function updateLocation() {
-    if (document.getElementById("latitude").value === latitude) return
-    if (document.getElementById("longitude").value === longitude) return
-    LocationHelper.findLocation((helper) => {
-        document.getElementById("latitude").value = helper.latitude
-        document.getElementById("longitude").value = helper.longitude
+    if (document.getElementById("latitude").value) {
+        updateMap(document.getElementById("latitude").value, document.getElementById("longitude").value)
+    } else {
+        LocationHelper.findLocation((helper) => {
+            console.log("Location found: " + helper.latitude + ", " + helper.longitude)
+            document.getElementById("latitude").value = helper.latitude
+            document.getElementById("longitude").value = helper.longitude
 
-        document.getElementById("latitudeDiscovery").value = helper.latitude
-        document.getElementById("longitudeDiscovery").value = helper.longitude
+            document.getElementById("latitudeDiscovery").value = helper.latitude
+            document.getElementById("longitudeDiscovery").value = helper.longitude
 
-        let mapContainer = document.getElementById("mapContainer")
-        mapContainer.innerHTML = ""
-        mapContainer
-            .appendChild(document.createElement("div"))
-            .setAttribute("id", "map")
+            updateMap(helper.latitude, helper.longitude)
+        })
+    }
+}
 
-        let manager = new MapManager()
-        manager.initMap(helper.latitude, helper.longitude)
-        manager.updateMarkers(helper.latitude, helper.longitude)
-
-        latitude = helper.latitude
-        longitude = helper.longitude
+function updateMap(latitude, longitude) {
+    let mapContainer = document.getElementById("mapContainer")
+    mapContainer.childNodes.forEach((child) => {
+        child.hidden = child.id !== "map"
     })
+
+    let taglist_json = document.getElementById("map").dataset.tags
+    let tags = taglist_json ? JSON.parse(taglist_json) : []
+
+    let manager = new MapManager()
+    manager.initMap(latitude, longitude)
+    manager.updateMarkers(latitude, longitude, tags)
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
