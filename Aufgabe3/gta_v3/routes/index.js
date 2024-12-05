@@ -34,6 +34,8 @@ const GeoTagStore = require('../models/geotag-store');
 const tagStore = new GeoTagStore()
 tagStore.populateWithExamples()
 
+const NEARBY_RADIUS = 0.002
+
 /**
  * Route '/' for HTTP 'GET' requests.
  * (http://expressjs.com/de/4x/api.html#app.get.method)
@@ -71,7 +73,11 @@ router.post('/tagging', (req, res) => {
   newTag.name = req.body.name
   newTag.hashtag = req.body.hashtag
   tagStore.addGeoTag(newTag)
-  res.render('index', { taglist: tagStore.getNearbyGeoTags(newTag.longitude, newTag.latitude, 0.002) })
+  res.render('index', { 
+    taglist: tagStore.getNearbyGeoTags(newTag.longitude, newTag.latitude, NEARBY_RADIUS),
+    longitude: newTag.longitude,
+    latitude: newTag.latitude
+   })
 });
 
 /**
@@ -95,10 +101,15 @@ router.post('/discovery', (req, res) => {
   var latitude = req.body.latitude
   var searchterm = req.body.searchterm
   if (searchterm) {
-    res.render('index', { taglist: tagStore.searchNearbyGeoTags(longitude, latitude, 0.002, searchterm) })
+    res.render('index', { 
+      taglist: tagStore.searchNearbyGeoTags(longitude, latitude, NEARBY_RADIUS, searchterm),
+      longitude: longitude,
+      latitude: latitude,
+     })
   } else {
-
-    res.render('index', { taglist: tagStore.getNearbyGeoTags(longitude, latitude, 0.002) })
+    res.render('index', { 
+      taglist: tagStore.getNearbyGeoTags(longitude, latitude, NEARBY_RADIUS)
+    })
   }
 });
 

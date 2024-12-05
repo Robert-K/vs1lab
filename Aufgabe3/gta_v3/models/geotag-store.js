@@ -57,7 +57,7 @@ class InMemoryGeoTagStore{
     }
 
     searchNearbyGeoTags(longitude, latitude, radius, keyword){
-        return this.getNearbyGeoTags(longitude, latitude, radius).filter(geoTag => geoTag.name.includes(keyword) || geoTag.hashtag.includes(keyword));
+        return this.getNearbyGeoTags(longitude, latitude, radius).filter(geoTag => geoTag.name.toLowerCase().includes(keyword.toLowerCase()) || geoTag.hashtag.includes(keyword));
     }
 
     populateWithExamples() {
