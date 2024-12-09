@@ -58,7 +58,7 @@
             <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
                 <fieldset>
                     <label for="searchterm">Search term or keywords:</label> 
-                    <input name="searchterm" id="searchterm" placeholder="e.g. Berlin" required>
+                    <input name="searchterm" id="searchterm" placeholder="e.g. Berlin">
                     <input name="latitude" value="<%= locals?.latitude %>"  id="latitudeDiscovery" hidden required>
                     <input name="longitude" value="<%= locals?.longitude %>" id="longitudeDiscovery" hidden required>        
                     <input type="submit" value="Search"></input>
