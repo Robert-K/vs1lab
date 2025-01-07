@@ -128,18 +128,26 @@ router.post('/discovery', (req, res) => {
  */
 
 router.get('/api/geotags', (req, res) => {
+  var perPage = req.query.perPage
+  var page = req.query.page
+
   var longitude = req.query.longitude
   var latitude = req.query.latitude
   var searchterm = req.query.searchterm
+  var response = []
   if (searchterm) {
     if (latitude && longitude) {
-      res.json(tagStore.searchNearbyGeoTags(longitude, latitude, NEARBY_RADIUS, searchterm))
+      response = tagStore.searchNearbyGeoTags(longitude, latitude, NEARBY_RADIUS, searchterm)
     } else {
-      res.json(tagStore.searchGeoTags(searchterm))
+      response = tagStore.searchGeoTags(searchterm)
     }
   } else {
-    res.json(tagStore.getGeoTags())
+    response = tagStore.getGeoTags()
   }
+  if (perPage && page) {
+    response = {tags: response.slice(perPage * (page - 1), perPage * page), pages: Math.ceil(response.length / perPage), total: response.length}
+  }
+  res.json(response)
 });
 
 
