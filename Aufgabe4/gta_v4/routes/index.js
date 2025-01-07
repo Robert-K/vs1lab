@@ -138,6 +138,7 @@ router.get('/api/geotags', (req, res) => {
       res.json(tagStore.searchGeoTags(searchterm))
     }
   } else {
+    console.log(tagStore.getGeoTags())
     res.json(tagStore.getGeoTags())
   }
 });
@@ -160,8 +161,9 @@ router.post('/api/geotags', (req, res) => {
   newTag.longitude = req.body.longitude
   newTag.name = req.body.name
   newTag.hashtag = req.body.hashtag
-  tagStore.addGeoTag(newTag)
-  res.location('/api/geotags/' + newTag.id)
+  var newId = tagStore.getNewId()
+  tagStore.addGeoTag(newTag, newId)
+  res.location('/api/geotags/' + newId)
   res.status(201).json(newTag)
 });
 

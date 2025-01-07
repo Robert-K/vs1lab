@@ -34,15 +34,15 @@ class InMemoryGeoTagStore{
     #maxId = 0;
 
     getNewId() {
-        return this.#maxId++;
+        return (this.#maxId++).toString();
     }
 
     setGeoTag(id, geoTag){
-        this.#geoTags.set(id, geoTag);
+        this.#geoTags.set(id.toString(), geoTag);
     }
 
     getGeoTagById(id){
-        return this.#geoTags.get(id);
+        return this.#geoTags.get(id.toString());
     }
 
     addGeoTag(geoTag, id=this.getNewId()){
@@ -54,7 +54,7 @@ class InMemoryGeoTagStore{
     }
 
     removeGeoTagById(id){
-        this.#geoTags.delete(id);
+        this.#geoTags.delete(id.toString());
     }
 
     distance(longitude1, latitude1, longitude2, latitude2){
@@ -66,15 +66,15 @@ class InMemoryGeoTagStore{
     }
 
     getGeoTags() {
-        return this.#geoTags.values();
+        return Array.from(this.#geoTags.values());
     }
 
     searchGeoTags(keyword){
-        return this.#geoTags.values().filter(geoTag => geoTag.name.toLowerCase().includes(keyword.toLowerCase()) || geoTag.hashtag.includes(keyword));
+        return Array.from(this.#geoTags.values()).filter(geoTag => geoTag.name.toLowerCase().includes(keyword.toLowerCase()) || geoTag.hashtag.includes(keyword));
     }
 
     getNearbyGeoTags(longitude, latitude, radius){
-        return this.#geoTags.values().filter(geoTag => {
+        return Array.from(this.#geoTags.values()).filter(geoTag => {
             var dist = this.distance(geoTag.longitude, geoTag.latitude, longitude, latitude);
             return dist <= radius;
         });
@@ -93,6 +93,7 @@ class InMemoryGeoTagStore{
             newTag.hashtag = tag[3]
             this.addGeoTag(newTag)
         });
+        console.log("GeoTagStore populated with examples.", this.#geoTags);
     }
 }
 
