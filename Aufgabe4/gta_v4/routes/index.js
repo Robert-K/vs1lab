@@ -154,7 +154,16 @@ router.get('/api/geotags', (req, res) => {
  * The new resource is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
+router.post('/api/geotags', (req, res) => {
+  var newTag = new GeoTag()
+  newTag.latitude = req.body.latitude
+  newTag.longitude = req.body.longitude
+  newTag.name = req.body.name
+  newTag.hashtag = req.body.hashtag
+  tagStore.addGeoTag(newTag)
+  res.location('/api/geotags/' + newTag.id)
+  res.status(201).json(newTag)
+});
 
 
 /**
@@ -167,7 +176,10 @@ router.get('/api/geotags', (req, res) => {
  * The requested tag is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
+router.get('/api/geotags/:id', (req, res) => {
+  var id = req.params.id
+  res.json(tagStore.getGeoTagById(id))
+});
 
 
 /**
@@ -184,7 +196,16 @@ router.get('/api/geotags', (req, res) => {
  * The updated resource is rendered as JSON in the response. 
  */
 
-// TODO: ... your code here ...
+router.put('/api/geotags/:id', (req, res) => {
+  var id = req.params.id
+  var newTag = new GeoTag()
+  newTag.latitude = req.body.latitude
+  newTag.longitude = req.body.longitude
+  newTag.name = req.body.name
+  newTag.hashtag = req.body.hashtag
+  tagStore.setGeoTag(id, newTag)
+  res.json(newTag)
+});
 
 
 /**
@@ -198,6 +219,11 @@ router.get('/api/geotags', (req, res) => {
  * The deleted resource is rendered as JSON in the response.
  */
 
-// TODO: ... your code here ...
+router.delete('/api/geotags/:id', (req, res) => {
+  var id = req.params.id
+  var tag = tagStore.getGeoTagById(id)
+  tagStore.removeGeoTagById(id)
+  res.json(tag)
+});
 
 module.exports = router;

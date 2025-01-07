@@ -29,14 +29,32 @@ const GeoTagExamples = require("./geotag-examples");
  */
 class InMemoryGeoTagStore{
 
-    #geoTags = [];
+    #geoTags = new Map();
 
-    addGeoTag(geoTag){
-        this.#geoTags.push(geoTag);
+    #maxId = 0;
+
+    getNewId() {
+        return this.#maxId++;
+    }
+
+    setGeoTag(id, geoTag){
+        this.#geoTags.set(id, geoTag);
+    }
+
+    getGeoTagById(id){
+        return this.#geoTags.get(id);
+    }
+
+    addGeoTag(geoTag, id=this.getNewId()){
+        this.#geoTags.set(id, geoTag);
     }
 
     removeGeoTag(name){
         this.#geoTags = this.#geoTags.filter(geoTag => geoTag.name !== name);
+    }
+
+    removeGeoTagById(id){
+        this.#geoTags.delete(id);
     }
 
     distance(longitude1, latitude1, longitude2, latitude2){
@@ -48,18 +66,16 @@ class InMemoryGeoTagStore{
     }
 
     getGeoTags() {
-        return this.#geoTags;
+        return this.#geoTags.values();
     }
 
     searchGeoTags(keyword){
-        return this.#geoTags.filter(geoTag => geoTag.name.toLowerCase().includes(keyword.toLowerCase()) || geoTag.hashtag.includes(keyword));
+        return this.#geoTags.values().filter(geoTag => geoTag.name.toLowerCase().includes(keyword.toLowerCase()) || geoTag.hashtag.includes(keyword));
     }
 
     getNearbyGeoTags(longitude, latitude, radius){
-        return this.#geoTags.filter(geoTag => {
-            console.log(geoTag)
+        return this.#geoTags.values().filter(geoTag => {
             var dist = this.distance(geoTag.longitude, geoTag.latitude, longitude, latitude);
-            console.log(dist);
             return dist <= radius;
         });
     }
