@@ -73,6 +73,7 @@ document.getElementById("tag-form").addEventListener("submit", (event) => {
     let longitude = document.getElementById("longitude").value
     let name = document.getElementById("name").value
     let hashtag = document.getElementById("hashtag").value
+    let searchterm = document.getElementById("searchterm").value
 
     let newGeoTag = { latitude, longitude, name, hashtag }
 
@@ -87,9 +88,10 @@ document.getElementById("tag-form").addEventListener("submit", (event) => {
         let queryParams = new URLSearchParams({
             latitude,
             longitude,
+            searchterm,
             perPage,
             page,
-        }).toString
+        }).toString()
         fetch(`/api/geotags/?${queryParams}`, {
             method: "GET",
             headers: {

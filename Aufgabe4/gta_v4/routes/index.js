@@ -231,6 +231,9 @@ router.put('/api/geotags/:id', (req, res) => {
 router.delete('/api/geotags/:id', (req, res) => {
   var id = req.params.id
   var tag = tagStore.getGeoTagById(id)
+  if (!tag) {
+    return res.status(400).json({ error: 'Tag not found' })
+  }
   tagStore.removeGeoTagById(id)
   res.json(tag)
 });
